@@ -1,0 +1,21 @@
+version: 0.2            
+phases:
+  install:
+    runtime-versions:
+      nodejs: 14.x
+  pre_build:
+    commands:
+      - npm install
+  build:
+    commands:
+      - npm run build
+  post_build:
+    commands:
+      - mv appspec.yml dist/angular
+      - mkdir dist/angular/scripts
+      - mv scripts/* dist/angular/scripts
+      - echo 'DONE'
+artifacts:
+  files:
+    - '**/*'
+  base-directory: dist/angular
